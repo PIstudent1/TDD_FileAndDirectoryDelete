@@ -31,11 +31,20 @@ class TestFileAndDirectoryDelete(unittest.TestCase):
         self.assertTrue(file_dir_delete.is_exists(temp_dir_path))
         temp_dir.cleanup()
 
-
-
     def test_is_exists_dir_False(self):
         file_dir_delete = FileAndDirectoryDelete()
         self.assertFalse(file_dir_delete.is_exists("/non/existent/path"))
+
+
+    def test_destroy_file(self):
+        file_dir_delete = FileAndDirectoryDelete()
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        with open(temp_file.name, 'w') as f:
+            f.write('test data')
+        temp_file.close()
+        file_dir_delete.destroy_file(temp_file.name)
+        self.assertFalse(os.path.exists(temp_file.name))
+
 
 
 
