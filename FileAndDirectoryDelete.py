@@ -1,4 +1,9 @@
+import os
+import shutil
 
 class FileAndDirectoryDelete:
-    pass
+
+    def is_exists(self, path):
+        return os.path.exists(path)
+
 
