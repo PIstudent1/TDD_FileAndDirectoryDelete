@@ -67,7 +67,18 @@ class TestFileAndDirectoryDelete(unittest.TestCase):
         self.assertTrue(file_dir_delete.check_access(temp_dir.name))
         temp_dir.cleanup()
 
+    def test_select_file_string(self):
+        file_dir_delete = FileAndDirectoryDelete()
+        result = file_dir_delete.select_file()
+        self.assertIsInstance(result, str)
+
+    def test_select_directory_string(self):
+        file_dir_delete = FileAndDirectoryDelete()
+        result = file_dir_delete.select_directory()
+        self.assertIsInstance(result, str)
 
 
+if __name__ == '__main__':
+    unittest.main()
 
 
