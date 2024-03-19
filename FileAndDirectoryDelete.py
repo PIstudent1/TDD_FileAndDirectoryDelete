@@ -6,10 +6,11 @@ from tkinter import filedialog, messagebox
 class FileAndDirectoryDelete:
     def __init__(self, root, overwrite_times=10, overwrite_char='0'):
         self.root = root
-        self.root.geometry("800x600")
+        self.root.geometry("800x150")
         self.file_path = tk.StringVar()
         self.dir_path = tk.StringVar()
         self.choosen = tk.StringVar(value='None')
+        self.res = 0
         self.overwrite_times = overwrite_times
         self.overwrite_char = overwrite_char
         self.create_widgets()
@@ -35,7 +36,8 @@ class FileAndDirectoryDelete:
                 file.seek(0)
                 file.write(self.overwrite_char * length)
         os.remove(file_path)
-        messagebox.showinfo("Результат", f"Файл {file_path} успешно уничтожен.")
+        if self.res == 1:
+            messagebox.showinfo("Результат", f"Файл {file_path} успешно уничтожен.")
 
 
 
@@ -72,9 +74,11 @@ class FileAndDirectoryDelete:
         selection = self.choosen.get()
         if selection == 'File':
             self.label_1.config(text='Файл для уничтожения:')
+            self.res = 1
             self.select_file()
         if selection == 'Dir':
             self.label_1.config(text='Папка для уничтожения:')
+            self.res = 2
             self.select_directory()
 
     def create_widgets(self):
