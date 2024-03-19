@@ -35,7 +35,6 @@ class TestFileAndDirectoryDelete(unittest.TestCase):
         file_dir_delete = FileAndDirectoryDelete()
         self.assertFalse(file_dir_delete.is_exists("/non/existent/path"))
 
-
     def test_destroy_file(self):
         file_dir_delete = FileAndDirectoryDelete()
         temp_file = tempfile.NamedTemporaryFile(delete=False)
@@ -53,6 +52,20 @@ class TestFileAndDirectoryDelete(unittest.TestCase):
             f.write('test data')
         file_dir_delete.destroy_directory(test_dir)
         self.assertFalse(os.path.exists(test_dir))
+
+    def test_check_access_file(self):
+        file_dir_delete = FileAndDirectoryDelete()
+        temp_file = tempfile.NamedTemporaryFile(delete=False)
+        temp_file.close()
+        self.assertTrue(file_dir_delete.check_access(temp_file.name))
+        os.unlink(temp_file)
+
+
+    def test_check_access_directory(self):
+        file_dir_delete = FileAndDirectoryDelete()
+        temp_dir = tempfile.TemporaryDirectory()
+        self.assertTrue(file_dir_delete.check_access(temp_dir.name))
+        temp_dir.cleanup()
 
 
 
