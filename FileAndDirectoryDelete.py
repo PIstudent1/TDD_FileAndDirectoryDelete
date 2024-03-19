@@ -17,6 +17,10 @@ class FileAndDirectoryDelete:
             print(f"Файл {file_path} не найден.")
             return
 
+        if not self.check_access(file_path):
+            print(f"Нет доступа к файлу {file_path}.")
+            return
+
         with open(file_path, "r+") as file:
             length = os.path.getsize(file_path)
             for _ in range(self.overwrite_times):
@@ -30,6 +34,10 @@ class FileAndDirectoryDelete:
     def destroy_directory(self, dir_path):
         if not self.is_exists(dir_path):
             print(f"Папка {dir_path} не найдена.")
+            return
+
+        if not self.check_access(dir_path):
+            print(f"Нет доступа к папке {dir_path}.")
             return
 
         for root, dirs, files in os.walk(dir_path, topdown=False):
