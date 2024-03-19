@@ -24,4 +24,20 @@ class FileAndDirectoryDelete:
 
 
 
+    def destroy_directory(self, dir_path):
+        if not self.is_exists(dir_path):
+            print(f"Папка {dir_path} не найдена.")
+            return
+
+        for root, dirs, files in os.walk(dir_path, topdown=False):
+            for name in files:
+                file_path = os.path.join(root, name)
+                self.destroy_file(file_path)
+            for name in dirs:
+                os.rmdir(os.path.join(root, name))
+        os.rmdir(dir_path)
+        print(f"Папка {dir_path} успешно уничтожена.")
+
+
+
 
