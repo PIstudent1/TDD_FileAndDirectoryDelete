@@ -1,5 +1,7 @@
 import os
 import shutil
+import tkinter as tk
+from tkinter import filedialog
 
 class FileAndDirectoryDelete:
     def __init__(self, overwrite_times=10, overwrite_char='0'):
@@ -48,6 +50,19 @@ class FileAndDirectoryDelete:
                 os.rmdir(os.path.join(root, name))
         os.rmdir(dir_path)
         print(f"Папка {dir_path} успешно уничтожена.")
+
+
+    def select_file(self):
+        root = tk.Tk()
+        root.withdraw()
+        file_path = filedialog.askopenfilename()
+        return file_path
+
+    def select_directory(self):
+        root = tk.Tk()
+        root.withdraw()
+        directory_path = filedialog.askdirectory()
+        return directory_path
 
 
 
