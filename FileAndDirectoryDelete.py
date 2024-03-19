@@ -9,6 +9,9 @@ class FileAndDirectoryDelete:
     def is_exists(self, path):
         return os.path.exists(path)
 
+    def check_access(self, path):
+        return os.access(path, os.W_OK)
+
     def destroy_file(self, file_path):
         if not self.is_exists(file_path):
             print(f"Файл {file_path} не найден.")
@@ -37,6 +40,8 @@ class FileAndDirectoryDelete:
                 os.rmdir(os.path.join(root, name))
         os.rmdir(dir_path)
         print(f"Папка {dir_path} успешно уничтожена.")
+
+
 
 
 

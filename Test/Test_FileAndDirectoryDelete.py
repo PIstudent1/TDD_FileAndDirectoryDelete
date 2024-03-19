@@ -58,7 +58,7 @@ class TestFileAndDirectoryDelete(unittest.TestCase):
         temp_file = tempfile.NamedTemporaryFile(delete=False)
         temp_file.close()
         self.assertTrue(file_dir_delete.check_access(temp_file.name))
-        os.unlink(temp_file)
+        os.unlink(temp_file.name)
 
 
     def test_check_access_directory(self):
