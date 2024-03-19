@@ -45,6 +45,15 @@ class TestFileAndDirectoryDelete(unittest.TestCase):
         file_dir_delete.destroy_file(temp_file.name)
         self.assertFalse(os.path.exists(temp_file.name))
 
+    def test_destroy_directory(self):
+        file_dir_delete = FileAndDirectoryDelete()
+        test_dir = tempfile.mkdtemp()
+        test_file = os.path.join(test_dir, 'test_file.txt')
+        with open(test_file, 'w') as f:
+            f.write('test data')
+        file_dir_delete.destroy_directory(test_dir)
+        self.assertFalse(os.path.exists(test_dir))
+
 
 
 
